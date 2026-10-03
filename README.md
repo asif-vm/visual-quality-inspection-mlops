@@ -37,9 +37,11 @@ pytest -q
 uvicorn api:app --reload
 ```
 
-Upload a grayscale or color PNG/JPEG to `POST /inspect`; the service converts
-it to a normalized 32x32 grayscale tensor and returns the predicted class,
-defect probability, and whether a human review is required.
+Open `http://127.0.0.1:8000` for the drag-and-drop inspection interface. Upload
+a grayscale or color PNG/JPEG; the service converts it to a normalized 32x32
+grayscale tensor and returns the predicted class, defect probability, and
+whether a human review is required. The developer API remains available at
+`http://127.0.0.1:8000/docs`.
 
 ## MLflow
 

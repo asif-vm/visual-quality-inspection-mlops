@@ -1,10 +1,12 @@
 from pathlib import Path
 
 import torch
+from fastapi.testclient import TestClient
 
 from src.data import SyntheticDefectDataset
 from src.model import DefectCNN
 from src.training import train
+from api import app
 
 
 def test_dataset_and_model_shapes() -> None:
@@ -24,4 +26,11 @@ def test_training_writes_loadable_artifacts(tmp_path: Path) -> None:
     assert (tmp_path / "metrics.json").exists()
     bundle = torch.load(tmp_path / "model.pt", map_location="cpu", weights_only=True)
     assert bundle["classes"] == ["normal", "defect"]
+
+
+def test_homepage_has_human_friendly_upload() -> None:
+    response = TestClient(app).get("/")
+    assert response.status_code == 200
+    assert "Drop a PNG or JPEG here" in response.text
+    assert "Inspect image" in response.text
 
