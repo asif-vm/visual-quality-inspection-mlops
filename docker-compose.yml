@@ -1,0 +1,13 @@
+services:
+  trainer:
+    build: .
+    command: python train.py --samples 2000 --epochs 5
+    volumes:
+      - ./artifacts:/app/artifacts
+  api:
+    build: .
+    ports: ["8000:8000"]
+    volumes:
+      - ./artifacts:/app/artifacts
+    depends_on: [trainer]
+

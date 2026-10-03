@@ -1,0 +1,2 @@
+"""Visual quality inspection package."""
+

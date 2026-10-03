@@ -1,0 +1,10 @@
+{
+  "loss": 0.5445,
+  "accuracy": 0.9825,
+  "defect_precision": 1.0,
+  "defect_recall": 0.962,
+  "f1": 0.9806,
+  "train_samples": 1600,
+  "test_samples": 400,
+  "epochs": 5
+}

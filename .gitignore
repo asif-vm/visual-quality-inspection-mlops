@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+mlruns/
+mlflow.db
+data/generated/
+artifacts/*.pt
+artifacts/*.npz
+

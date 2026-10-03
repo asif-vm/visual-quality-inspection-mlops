@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: visual-inspection-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: visual-inspection-api}
+  template:
+    metadata:
+      labels: {app: visual-inspection-api}
+    spec:
+      containers:
+        - name: api
+          image: visual-quality-inspection:latest
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet: {path: /health, port: 8000}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests: {cpu: "250m", memory: "512Mi"}
+            limits: {cpu: "1", memory: "1Gi"}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: visual-inspection-api
+spec:
+  selector: {app: visual-inspection-api}
+  ports:
+    - port: 80
+      targetPort: 8000
+
